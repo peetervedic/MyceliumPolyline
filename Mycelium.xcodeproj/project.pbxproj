@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE77E99719A2F4C20075006B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE77E99619A2F4C20075006B /* Foundation.framework */; };
+		BE77E99919A2F4C20075006B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE77E99819A2F4C20075006B /* CoreGraphics.framework */; };
+		BE77E99B19A2F4C20075006B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE77E99A19A2F4C20075006B /* UIKit.framework */; };
+		BE77E9A119A2F4C20075006B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE77E99F19A2F4C20075006B /* InfoPlist.strings */; };
+		BE77E9A319A2F4C20075006B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE77E9A219A2F4C20075006B /* main.m */; };
+		BE77E9A719A2F4C20075006B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE77E9A619A2F4C20075006B /* AppDelegate.m */; };
+		BE77E9AA19A2F4C20075006B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE77E9A819A2F4C20075006B /* Main.storyboard */; };
+		BE77E9AD19A2F4C20075006B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE77E9AC19A2F4C20075006B /* ViewController.m */; };
+		BE77E9AF19A2F4C20075006B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE77E9AE19A2F4C20075006B /* Images.xcassets */; };
+		BE77E9B619A2F4C20075006B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE77E9B519A2F4C20075006B /* XCTest.framework */; };
+		BE77E9B719A2F4C20075006B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE77E99619A2F4C20075006B /* Foundation.framework */; };
+		BE77E9B819A2F4C20075006B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE77E99A19A2F4C20075006B /* UIKit.framework */; };
+		BE77E9C019A2F4C20075006B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE77E9BE19A2F4C20075006B /* InfoPlist.strings */; };
+		BE77E9C219A2F4C20075006B /* MyceliumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE77E9C119A2F4C20075006B /* MyceliumTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE77E9B919A2F4C20075006B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE77E98B19A2F4C20075006B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE77E99219A2F4C20075006B;
+			remoteInfo = Mycelium;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BE77E99319A2F4C20075006B /* Mycelium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mycelium.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE77E99619A2F4C20075006B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BE77E99819A2F4C20075006B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BE77E99A19A2F4C20075006B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BE77E99E19A2F4C20075006B /* Mycelium-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mycelium-Info.plist"; sourceTree = "<group>"; };
+		BE77E9A019A2F4C20075006B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE77E9A219A2F4C20075006B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BE77E9A419A2F4C20075006B /* Mycelium-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mycelium-Prefix.pch"; sourceTree = "<group>"; };
+		BE77E9A519A2F4C20075006B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BE77E9A619A2F4C20075006B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BE77E9A919A2F4C20075006B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BE77E9AB19A2F4C20075006B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BE77E9AC19A2F4C20075006B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BE77E9AE19A2F4C20075006B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BE77E9B419A2F4C20075006B /* MyceliumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyceliumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE77E9B519A2F4C20075006B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BE77E9BD19A2F4C20075006B /* MyceliumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyceliumTests-Info.plist"; sourceTree = "<group>"; };
+		BE77E9BF19A2F4C20075006B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE77E9C119A2F4C20075006B /* MyceliumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyceliumTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE77E99019A2F4C20075006B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE77E99919A2F4C20075006B /* CoreGraphics.framework in Frameworks */,
+				BE77E99B19A2F4C20075006B /* UIKit.framework in Frameworks */,
+				BE77E99719A2F4C20075006B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE77E9B119A2F4C20075006B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE77E9B619A2F4C20075006B /* XCTest.framework in Frameworks */,
+				BE77E9B819A2F4C20075006B /* UIKit.framework in Frameworks */,
+				BE77E9B719A2F4C20075006B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE77E98A19A2F4C20075006B = {
+			isa = PBXGroup;
+			children = (
+				BE77E99C19A2F4C20075006B /* Mycelium */,
+				BE77E9BB19A2F4C20075006B /* MyceliumTests */,
+				BE77E99519A2F4C20075006B /* Frameworks */,
+				BE77E99419A2F4C20075006B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE77E99419A2F4C20075006B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE77E99319A2F4C20075006B /* Mycelium.app */,
+				BE77E9B419A2F4C20075006B /* MyceliumTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE77E99519A2F4C20075006B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE77E99619A2F4C20075006B /* Foundation.framework */,
+				BE77E99819A2F4C20075006B /* CoreGraphics.framework */,
+				BE77E99A19A2F4C20075006B /* UIKit.framework */,
+				BE77E9B519A2F4C20075006B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE77E99C19A2F4C20075006B /* Mycelium */ = {
+			isa = PBXGroup;
+			children = (
+				BE77E9A519A2F4C20075006B /* AppDelegate.h */,
+				BE77E9A619A2F4C20075006B /* AppDelegate.m */,
+				BE77E9A819A2F4C20075006B /* Main.storyboard */,
+				BE77E9AB19A2F4C20075006B /* ViewController.h */,
+				BE77E9AC19A2F4C20075006B /* ViewController.m */,
+				BE77E9AE19A2F4C20075006B /* Images.xcassets */,
+				BE77E99D19A2F4C20075006B /* Supporting Files */,
+			);
+			path = Mycelium;
+			sourceTree = "<group>";
+		};
+		BE77E99D19A2F4C20075006B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE77E99E19A2F4C20075006B /* Mycelium-Info.plist */,
+				BE77E99F19A2F4C20075006B /* InfoPlist.strings */,
+				BE77E9A219A2F4C20075006B /* main.m */,
+				BE77E9A419A2F4C20075006B /* Mycelium-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE77E9BB19A2F4C20075006B /* MyceliumTests */ = {
+			isa = PBXGroup;
+			children = (
+				BE77E9C119A2F4C20075006B /* MyceliumTests.m */,
+				BE77E9BC19A2F4C20075006B /* Supporting Files */,
+			);
+			path = MyceliumTests;
+			sourceTree = "<group>";
+		};
+		BE77E9BC19A2F4C20075006B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE77E9BD19A2F4C20075006B /* MyceliumTests-Info.plist */,
+				BE77E9BE19A2F4C20075006B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE77E99219A2F4C20075006B /* Mycelium */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE77E9C519A2F4C20075006B /* Build configuration list for PBXNativeTarget "Mycelium" */;
+			buildPhases = (
+				BE77E98F19A2F4C20075006B /* Sources */,
+				BE77E99019A2F4C20075006B /* Frameworks */,
+				BE77E99119A2F4C20075006B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mycelium;
+			productName = Mycelium;
+			productReference = BE77E99319A2F4C20075006B /* Mycelium.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BE77E9B319A2F4C20075006B /* MyceliumTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE77E9C819A2F4C20075006B /* Build configuration list for PBXNativeTarget "MyceliumTests" */;
+			buildPhases = (
+				BE77E9B019A2F4C20075006B /* Sources */,
+				BE77E9B119A2F4C20075006B /* Frameworks */,
+				BE77E9B219A2F4C20075006B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE77E9BA19A2F4C20075006B /* PBXTargetDependency */,
+			);
+			name = MyceliumTests;
+			productName = MyceliumTests;
+			productReference = BE77E9B419A2F4C20075006B /* MyceliumTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE77E98B19A2F4C20075006B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Mycelium;
+				TargetAttributes = {
+					BE77E9B319A2F4C20075006B = {
+						TestTargetID = BE77E99219A2F4C20075006B;
+					};
+				};
+			};
+			buildConfigurationList = BE77E98E19A2F4C20075006B /* Build configuration list for PBXProject "Mycelium" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BE77E98A19A2F4C20075006B;
+			productRefGroup = BE77E99419A2F4C20075006B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE77E99219A2F4C20075006B /* Mycelium */,
+				BE77E9B319A2F4C20075006B /* MyceliumTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE77E99119A2F4C20075006B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE77E9AF19A2F4C20075006B /* Images.xcassets in Resources */,
+				BE77E9A119A2F4C20075006B /* InfoPlist.strings in Resources */,
+				BE77E9AA19A2F4C20075006B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE77E9B219A2F4C20075006B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE77E9C019A2F4C20075006B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE77E98F19A2F4C20075006B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE77E9AD19A2F4C20075006B /* ViewController.m in Sources */,
+				BE77E9A719A2F4C20075006B /* AppDelegate.m in Sources */,
+				BE77E9A319A2F4C20075006B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE77E9B019A2F4C20075006B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE77E9C219A2F4C20075006B /* MyceliumTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE77E9BA19A2F4C20075006B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE77E99219A2F4C20075006B /* Mycelium */;
+			targetProxy = BE77E9B919A2F4C20075006B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BE77E99F19A2F4C20075006B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE77E9A019A2F4C20075006B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BE77E9A819A2F4C20075006B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE77E9A919A2F4C20075006B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BE77E9BE19A2F4C20075006B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE77E9BF19A2F4C20075006B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE77E9C319A2F4C20075006B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BE77E9C419A2F4C20075006B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE77E9C619A2F4C20075006B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mycelium/Mycelium-Prefix.pch";
+				INFOPLIST_FILE = "Mycelium/Mycelium-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BE77E9C719A2F4C20075006B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mycelium/Mycelium-Prefix.pch";
+				INFOPLIST_FILE = "Mycelium/Mycelium-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		BE77E9C919A2F4C20075006B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mycelium.app/Mycelium";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mycelium/Mycelium-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MyceliumTests/MyceliumTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		BE77E9CA19A2F4C20075006B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mycelium.app/Mycelium";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mycelium/Mycelium-Prefix.pch";
+				INFOPLIST_FILE = "MyceliumTests/MyceliumTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE77E98E19A2F4C20075006B /* Build configuration list for PBXProject "Mycelium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE77E9C319A2F4C20075006B /* Debug */,
+				BE77E9C419A2F4C20075006B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE77E9C519A2F4C20075006B /* Build configuration list for PBXNativeTarget "Mycelium" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE77E9C619A2F4C20075006B /* Debug */,
+				BE77E9C719A2F4C20075006B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BE77E9C819A2F4C20075006B /* Build configuration list for PBXNativeTarget "MyceliumTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE77E9C919A2F4C20075006B /* Debug */,
+				BE77E9CA19A2F4C20075006B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BE77E98B19A2F4C20075006B /* Project object */;
+}
