@@ -21,6 +21,18 @@
 		BE77E9B819A2F4C20075006B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE77E99A19A2F4C20075006B /* UIKit.framework */; };
 		BE77E9C019A2F4C20075006B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE77E9BE19A2F4C20075006B /* InfoPlist.strings */; };
 		BE77E9C219A2F4C20075006B /* MyceliumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE77E9C119A2F4C20075006B /* MyceliumTests.m */; };
+		BEABBF8919A2F54900BB0005 /* MBXMapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABBF8019A2F54900BB0005 /* MBXMapKit.m */; };
+		BEABBF8A19A2F54900BB0005 /* MBXOfflineMapDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABBF8219A2F54900BB0005 /* MBXOfflineMapDatabase.m */; };
+		BEABBF8B19A2F54900BB0005 /* MBXOfflineMapDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABBF8419A2F54900BB0005 /* MBXOfflineMapDownloader.m */; };
+		BEABBF8C19A2F54900BB0005 /* MBXPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABBF8619A2F54900BB0005 /* MBXPointAnnotation.m */; };
+		BEABBF8D19A2F54900BB0005 /* MBXRasterTileOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABBF8819A2F54900BB0005 /* MBXRasterTileOverlay.m */; };
+		BEABBF8F19A2F55400BB0005 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEABBF8E19A2F55400BB0005 /* MapKit.framework */; };
+		BEABBF9119A2F55E00BB0005 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEABBF9019A2F55E00BB0005 /* CoreLocation.framework */; };
+		BEABBF9319A2F57300BB0005 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEABBF9219A2F57300BB0005 /* libsqlite3.dylib */; };
+		BEFF93C119B7E6D200FCE916 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFF93C019B7E6D200FCE916 /* CoreData.framework */; };
+		BEFF93C419B7E70B00FCE916 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEFF93C219B7E70B00FCE916 /* Model.xcdatamodeld */; };
+		BEFF93C719B7E87B00FCE916 /* Route.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFF93C619B7E87B00FCE916 /* Route.m */; };
+		BEFF93CA19B7E8BE00FCE916 /* Route+TransformableAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFF93C919B7E8BE00FCE916 /* Route+TransformableAttributes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +65,26 @@
 		BE77E9BD19A2F4C20075006B /* MyceliumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyceliumTests-Info.plist"; sourceTree = "<group>"; };
 		BE77E9BF19A2F4C20075006B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BE77E9C119A2F4C20075006B /* MyceliumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyceliumTests.m; sourceTree = "<group>"; };
+		BEABBF7E19A2F54900BB0005 /* MBXConstantsAndTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXConstantsAndTypes.h; sourceTree = "<group>"; };
+		BEABBF7F19A2F54900BB0005 /* MBXMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXMapKit.h; sourceTree = "<group>"; };
+		BEABBF8019A2F54900BB0005 /* MBXMapKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXMapKit.m; sourceTree = "<group>"; };
+		BEABBF8119A2F54900BB0005 /* MBXOfflineMapDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXOfflineMapDatabase.h; sourceTree = "<group>"; };
+		BEABBF8219A2F54900BB0005 /* MBXOfflineMapDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXOfflineMapDatabase.m; sourceTree = "<group>"; };
+		BEABBF8319A2F54900BB0005 /* MBXOfflineMapDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXOfflineMapDownloader.h; sourceTree = "<group>"; };
+		BEABBF8419A2F54900BB0005 /* MBXOfflineMapDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXOfflineMapDownloader.m; sourceTree = "<group>"; };
+		BEABBF8519A2F54900BB0005 /* MBXPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXPointAnnotation.h; sourceTree = "<group>"; };
+		BEABBF8619A2F54900BB0005 /* MBXPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXPointAnnotation.m; sourceTree = "<group>"; };
+		BEABBF8719A2F54900BB0005 /* MBXRasterTileOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXRasterTileOverlay.h; sourceTree = "<group>"; };
+		BEABBF8819A2F54900BB0005 /* MBXRasterTileOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXRasterTileOverlay.m; sourceTree = "<group>"; };
+		BEABBF8E19A2F55400BB0005 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		BEABBF9019A2F55E00BB0005 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BEABBF9219A2F57300BB0005 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		BEFF93C019B7E6D200FCE916 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BEFF93C319B7E70B00FCE916 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		BEFF93C519B7E87B00FCE916 /* Route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Route.h; sourceTree = "<group>"; };
+		BEFF93C619B7E87B00FCE916 /* Route.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Route.m; sourceTree = "<group>"; };
+		BEFF93C819B7E8BE00FCE916 /* Route+TransformableAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Route+TransformableAttributes.h"; path = "../Route+TransformableAttributes.h"; sourceTree = "<group>"; };
+		BEFF93C919B7E8BE00FCE916 /* Route+TransformableAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Route+TransformableAttributes.m"; path = "../Route+TransformableAttributes.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +92,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFF93C119B7E6D200FCE916 /* CoreData.framework in Frameworks */,
+				BEABBF9319A2F57300BB0005 /* libsqlite3.dylib in Frameworks */,
+				BEABBF9119A2F55E00BB0005 /* CoreLocation.framework in Frameworks */,
+				BEABBF8F19A2F55400BB0005 /* MapKit.framework in Frameworks */,
 				BE77E99919A2F4C20075006B /* CoreGraphics.framework in Frameworks */,
 				BE77E99B19A2F4C20075006B /* UIKit.framework in Frameworks */,
 				BE77E99719A2F4C20075006B /* Foundation.framework in Frameworks */,
@@ -82,6 +118,7 @@
 		BE77E98A19A2F4C20075006B = {
 			isa = PBXGroup;
 			children = (
+				BEABBF7D19A2F54900BB0005 /* MBXMapKit */,
 				BE77E99C19A2F4C20075006B /* Mycelium */,
 				BE77E9BB19A2F4C20075006B /* MyceliumTests */,
 				BE77E99519A2F4C20075006B /* Frameworks */,
@@ -101,6 +138,10 @@
 		BE77E99519A2F4C20075006B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEFF93C019B7E6D200FCE916 /* CoreData.framework */,
+				BEABBF9219A2F57300BB0005 /* libsqlite3.dylib */,
+				BEABBF9019A2F55E00BB0005 /* CoreLocation.framework */,
+				BEABBF8E19A2F55400BB0005 /* MapKit.framework */,
 				BE77E99619A2F4C20075006B /* Foundation.framework */,
 				BE77E99819A2F4C20075006B /* CoreGraphics.framework */,
 				BE77E99A19A2F4C20075006B /* UIKit.framework */,
@@ -112,6 +153,11 @@
 		BE77E99C19A2F4C20075006B /* Mycelium */ = {
 			isa = PBXGroup;
 			children = (
+				BEFF93C219B7E70B00FCE916 /* Model.xcdatamodeld */,
+				BEFF93C519B7E87B00FCE916 /* Route.h */,
+				BEFF93C619B7E87B00FCE916 /* Route.m */,
+				BEFF93C819B7E8BE00FCE916 /* Route+TransformableAttributes.h */,
+				BEFF93C919B7E8BE00FCE916 /* Route+TransformableAttributes.m */,
 				BE77E9A519A2F4C20075006B /* AppDelegate.h */,
 				BE77E9A619A2F4C20075006B /* AppDelegate.m */,
 				BE77E9A819A2F4C20075006B /* Main.storyboard */,
@@ -150,6 +196,25 @@
 				BE77E9BE19A2F4C20075006B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEABBF7D19A2F54900BB0005 /* MBXMapKit */ = {
+			isa = PBXGroup;
+			children = (
+				BEABBF7E19A2F54900BB0005 /* MBXConstantsAndTypes.h */,
+				BEABBF7F19A2F54900BB0005 /* MBXMapKit.h */,
+				BEABBF8019A2F54900BB0005 /* MBXMapKit.m */,
+				BEABBF8119A2F54900BB0005 /* MBXOfflineMapDatabase.h */,
+				BEABBF8219A2F54900BB0005 /* MBXOfflineMapDatabase.m */,
+				BEABBF8319A2F54900BB0005 /* MBXOfflineMapDownloader.h */,
+				BEABBF8419A2F54900BB0005 /* MBXOfflineMapDownloader.m */,
+				BEABBF8519A2F54900BB0005 /* MBXPointAnnotation.h */,
+				BEABBF8619A2F54900BB0005 /* MBXPointAnnotation.m */,
+				BEABBF8719A2F54900BB0005 /* MBXRasterTileOverlay.h */,
+				BEABBF8819A2F54900BB0005 /* MBXRasterTileOverlay.m */,
+			);
+			name = MBXMapKit;
+			path = "../../../Downloads/mbxmapkit-master/MBXMapKit";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +264,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Mycelium;
 				TargetAttributes = {
+					BE77E99219A2F4C20075006B = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					BE77E9B319A2F4C20075006B = {
 						TestTargetID = BE77E99219A2F4C20075006B;
 					};
@@ -249,9 +321,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFF93CA19B7E8BE00FCE916 /* Route+TransformableAttributes.m in Sources */,
+				BEABBF8A19A2F54900BB0005 /* MBXOfflineMapDatabase.m in Sources */,
+				BEABBF8D19A2F54900BB0005 /* MBXRasterTileOverlay.m in Sources */,
 				BE77E9AD19A2F4C20075006B /* ViewController.m in Sources */,
 				BE77E9A719A2F4C20075006B /* AppDelegate.m in Sources */,
 				BE77E9A319A2F4C20075006B /* main.m in Sources */,
+				BEFF93C719B7E87B00FCE916 /* Route.m in Sources */,
+				BEFF93C419B7E70B00FCE916 /* Model.xcdatamodeld in Sources */,
+				BEABBF8919A2F54900BB0005 /* MBXMapKit.m in Sources */,
+				BEABBF8C19A2F54900BB0005 /* MBXPointAnnotation.m in Sources */,
+				BEABBF8B19A2F54900BB0005 /* MBXOfflineMapDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +536,7 @@
 				BE77E9C719A2F4C20075006B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BE77E9C819A2F4C20075006B /* Build configuration list for PBXNativeTarget "MyceliumTests" */ = {
 			isa = XCConfigurationList;
@@ -464,8 +545,22 @@
 				BE77E9CA19A2F4C20075006B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BEFF93C219B7E70B00FCE916 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BEFF93C319B7E70B00FCE916 /* Model.xcdatamodel */,
+			);
+			currentVersion = BEFF93C319B7E70B00FCE916 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BE77E98B19A2F4C20075006B /* Project object */;
 }

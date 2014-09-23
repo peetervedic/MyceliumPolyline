@@ -13,16 +13,23 @@
 //  Copyright (c) 2014 Mapbox. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MBXViewController.h"
 #import "MBXMapKit.h"
-#import <CoreLocation/CoreLocation.h>
-#import "Polyline+TransformableAttributes.h"
-#import "AppDelegate.h"
 
-@interface ViewController ()
+@interface MBXViewController ()
 
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic) MBXRasterTileOverlay *rasterOverlay;
 @property (nonatomic) UIActionSheet *actionSheet;
+
+@property (weak, nonatomic) IBOutlet UIView *offlineMapProgressView;
+@property (weak, nonatomic) IBOutlet UIProgressView *offlineMapProgress;
+@property (weak, nonatomic) IBOutlet UIView *offlineMapDownloadControlsView;
+@property (weak, nonatomic) IBOutlet UIButton *offlineMapButtonHelp;
+@property (weak, nonatomic) IBOutlet UIButton *offlineMapButtonBegin;
+@property (weak, nonatomic) IBOutlet UIButton *offlineMapButtonCancel;
+@property (weak, nonatomic) IBOutlet UIButton *offlineMapButtonSuspendResume;
+@property (weak, nonatomic) IBOutlet UIView *removeOfflineMapsView;
 
 
 @property (nonatomic) BOOL viewHasFinishedLoading;
@@ -30,17 +37,14 @@
 
 @end
 
-@implementation ViewController
+@implementation MBXViewController
 
+
+#pragma mark - Initialization
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.mapView.delegate = self;
-    [self.mapView setShowsUserLocation:YES];
-
-    
     
     // Configure the amount of storage to use for NSURLCache's shared cache: You can also omit this and allow NSURLCache's
     // to use its default cache size. These sizes determines how much storage will be used for performance caching of HTTP
@@ -53,6 +57,11 @@
     //[urlCache removeAllCachedResponses];
     [NSURLCache setSharedURLCache:urlCache];
     
+    // Start with the offline map download progress and controls hidden (progress will be shownn from elsewhere as needed)
+    //
+    _offlineMapProgressView.hidden = YES;
+    _offlineMapDownloadControlsView.hidden = YES;
+    _removeOfflineMapsView.hidden = YES;
     
     // Let the shared offline map downloader know that we want to be notified of changes in its state. This will allow us to
     // update the download progress indicator and the begin/cancel/suspend/resume buttons
@@ -77,7 +86,7 @@
     
     // Configure a raster tile overlay to use the initial sample map
     //
-    _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"jonobolitho.j834jdml"];
+    _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"examples.map-pgygbwdm"];
     
     // Let the raster tile overlay know that we want to be notified when it has asynchronously loaded the sample map's metadata
     // (so we can set the map's center and zoom) and the sample map's markers (so we can add them to the map).
@@ -137,7 +146,7 @@
         _actionSheet = nil;
     } else {
         _actionSheet = [self universalActionSheet];
-        [_actionSheet showFromRect:((UIButton *)sender).frame inView:self.view animated:NO];
+        [_actionSheet showFromRect:((UIButton *)sender).frame inView:self.view animated:YES];
     }
 }
 
@@ -149,6 +158,8 @@
     _mapView.mapType = MKMapTypeStandard;
     _mapView.scrollEnabled = YES;
     _mapView.zoomEnabled = YES;
+    _offlineMapDownloadControlsView.hidden = YES;
+    _removeOfflineMapsView.hidden = YES;
     
     // Make sure that any downloads (tiles, metadata, marker icons) which might be in progress for
     // the old tile overlay are stopped, and remove the overlay and its markers from the MKMapView.
@@ -164,7 +175,123 @@
 }
 
 
+#pragma mark - UIActionSheetDelegate protocol implementation
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // This switches between maps in response to action sheet selections
+    //
+    switch(buttonIndex) {
+        case 0:
+        {
+            // OSM world map
+            [self resetMapViewAndRasterOverlayDefaults];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"examples.map-pgygbwdm"];
+            _rasterOverlay.delegate = self;
+            [_mapView addOverlay:_rasterOverlay];
+            break;
+        }
+        case 1:
+        {
+            // OSM over Apple satellite
+            [self resetMapViewAndRasterOverlayDefaults];
+            _mapView.mapType = MKMapTypeSatellite;
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"justin.map-9tlo4knw" includeMetadata:YES includeMarkers:NO];
+            _rasterOverlay.delegate = self;
+            _rasterOverlay.canReplaceMapContent = NO;
+            [_mapView addOverlay:_rasterOverlay];
+            break;
+        }
+        case 2:
+        {
+            // Terrain under Apple labels
+            [self resetMapViewAndRasterOverlayDefaults];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"justin.map-mf07hryq" includeMetadata:YES includeMarkers:NO];
+            _rasterOverlay.delegate = self;
+            [_mapView insertOverlay:_rasterOverlay atIndex:0 level:MKOverlayLevelAboveRoads];
+            break;
+        }
+        case 3:
+        {
+            // Tilemill bounded region (scroll & zoom limited to programmatic control only)
+            [self resetMapViewAndRasterOverlayDefaults];
+            _mapView.scrollEnabled = NO;
+            _mapView.zoomEnabled = NO;
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"justin.NACIS2012" includeMetadata:YES includeMarkers:NO];
+            _rasterOverlay.delegate = self;
+            [_mapView addOverlay:_rasterOverlay];
+            break;
+        }
+        case 4:
+        {
+            // Tilemill region over Apple
+            [self resetMapViewAndRasterOverlayDefaults];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"justin.clp-2011-11-03-1200" includeMetadata:YES includeMarkers:NO];
+            _rasterOverlay.delegate = self;
+            _rasterOverlay.canReplaceMapContent = NO;
+            [_mapView addOverlay:_rasterOverlay];
+            break;
+        }
+        case 5:
+        {
+            // Tilemill transparent over Apple
+            [self resetMapViewAndRasterOverlayDefaults];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"justin.pdx_meters" includeMetadata:YES includeMarkers:NO];
+            _rasterOverlay.delegate = self;
+            _rasterOverlay.canReplaceMapContent = NO;
+            [_mapView addOverlay:_rasterOverlay];
+            break;
+        }
+        case 6:
+        {
+            // Offline Map Downloader
+            [self resetMapViewAndRasterOverlayDefaults];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+            _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithMapID:@"examples.map-pgygbwdm" includeMetadata:YES includeMarkers:YES];
+            _rasterOverlay.delegate = self;
+            [_mapView addOverlay:_rasterOverlay];
+            _offlineMapDownloadControlsView.hidden = NO;
+            [self offlineMapDownloader:[MBXOfflineMapDownloader sharedOfflineMapDownloader] stateChangedTo:[[MBXOfflineMapDownloader sharedOfflineMapDownloader] state]];
+            break;
+        }
+        case 7:
+        {
+            // Offline Map Viewer
+            [self resetMapViewAndRasterOverlayDefaults];
+            _currentlyViewingAnOfflineMap = YES;
+            MBXOfflineMapDatabase *offlineMap = [[[MBXOfflineMapDownloader sharedOfflineMapDownloader] offlineMapDatabases] lastObject];
+            if (offlineMap)
+            {
+                _rasterOverlay = [[MBXRasterTileOverlay alloc] initWithOfflineMapDatabase:offlineMap];
+                _rasterOverlay.delegate = self;
+                _removeOfflineMapsView.hidden = NO;
+                
+                [_mapView addOverlay:_rasterOverlay];
+            }
+            else
+            {
+                [[[UIAlertView alloc] initWithTitle:@"No Offline Maps"
+                                            message:@"No offline maps have been downloaded."
+                                           delegate:nil
+                                  cancelButtonTitle:nil
+                                  otherButtonTitles:@"OK", nil] show];
+            }
+            break;
+        }
+        case 8:
+        {
+            // Show Attribution
+            [self attribution:_rasterOverlay.attribution];
+            break;
+        }
+    }
+}
 
 
 #pragma mark - AlertView stuff
@@ -277,8 +404,111 @@
 }
 
 
+- (IBAction)removeOfflineMapsButtonAction:(id)sender {
+    // Remove offline maps
+    //
+    [self areYouSureYouWantToDeleteAllOfflineMaps];
+}
 
 
+#pragma mark - MBXOfflineMapDownloaderDelegate implementation (progress indicator, etc)
+
+- (void)offlineMapDownloader:(MBXOfflineMapDownloader *)offlineMapDownloader stateChangedTo:(MBXOfflineMapDownloaderState)state
+{
+    switch (state)
+    {
+        case MBXOfflineMapDownloaderStateAvailable:
+            _offlineMapButtonBegin.enabled = YES;
+            _offlineMapButtonCancel.enabled = NO;
+            [_offlineMapButtonSuspendResume setTitle:@"Suspend" forState:UIControlStateNormal];
+            _offlineMapButtonSuspendResume.enabled = NO;
+            break;
+        case MBXOfflineMapDownloaderStateRunning:
+            _offlineMapButtonBegin.enabled = NO;
+            _offlineMapButtonCancel.enabled = YES;
+            [_offlineMapButtonSuspendResume setTitle:@"Suspend" forState:UIControlStateNormal];
+            _offlineMapButtonSuspendResume.enabled = YES;
+            break;
+        case MBXOfflineMapDownloaderStateCanceling:
+            _offlineMapButtonBegin.enabled = NO;
+            _offlineMapButtonCancel.enabled = NO;
+            [_offlineMapButtonSuspendResume setTitle:@"Suspend" forState:UIControlStateNormal];
+            _offlineMapButtonSuspendResume.enabled = NO;
+            break;
+        case MBXOfflineMapDownloaderStateSuspended:
+            _offlineMapButtonBegin.enabled = NO;
+            _offlineMapButtonCancel.enabled = YES;
+            [_offlineMapButtonSuspendResume setTitle:@"Resume" forState:UIControlStateNormal];
+            _offlineMapButtonSuspendResume.enabled = YES;
+            break;
+    }
+}
+
+
+- (void)offlineMapDownloader:(MBXOfflineMapDownloader *)offlineMapDownloader totalFilesExpectedToWrite:(NSUInteger)totalFilesExpectedToWrite
+{
+    [_offlineMapProgress setProgress:0.0 animated:NO];
+    _offlineMapProgressView.hidden = NO;
+}
+
+
+- (void)offlineMapDownloader:(MBXOfflineMapDownloader *)offlineMapDownloader totalFilesWritten:(NSUInteger)totalFilesWritten totalFilesExpectedToWrite:(NSUInteger)totalFilesExpectedToWrite
+{
+    if (totalFilesExpectedToWrite != 0)
+    {
+        float progress = ((float)totalFilesWritten) / ((float)totalFilesExpectedToWrite);
+        [_offlineMapProgress setProgress:progress animated:YES];
+    }
+}
+
+
+- (void)offlineMapDownloader:(MBXOfflineMapDownloader *)offlineMapDownloader didEncounterRecoverableError:(NSError *)error
+{
+    if(error.code == MBXMapKitErrorCodeURLSessionConnectivity)
+    {
+        // For some reason the offline map downloader wasn't able to make an HTTP connection. This probably means there is a
+        // network connectivity problem, so stop trying to download stuff. Please note how this is a minimal example which probably isn't
+        // very suitable to copy over into real apps. In contexts where there is a reasonable expectation of intermittent network
+        // connectivity, an approach with some capability to resume when the network re-connects would probably be better.
+        //
+        [offlineMapDownloader suspend];
+        NSLog(@"The offline map download was suspended in response to a network connectivity error: %@",error);
+    }
+    else if(error.code == MBXMapKitErrorCodeHTTPStatus)
+    {
+        // The HTTP status response for one of the urls requested by the offline map came back as something other than 200. This is
+        // not necessarily bad, but it probably indicates a problem with the parameters used to begin an offline map download. For
+        // example, you might have requested markers for a map that doesn't have any.
+        //
+        NSLog(@"The offline map downloader encountered an HTTP status error: %@",error);
+    }
+    else if(error.code == MBXMapKitErrorCodeOfflineMapSqlite)
+    {
+        // There was an sqlite error with the offline map. The most likely explanation is that the disk is running out of space.
+        //
+        NSLog(@"The offline map downloader encountered an sqlite error: %@",error);
+    }
+}
+
+
+- (void)offlineMapDownloader:(MBXOfflineMapDownloader *)offlineMapDownloader didCompleteOfflineMapDatabase:(MBXOfflineMapDatabase *)offlineMapDatabase withError:(NSError *)error
+{
+    _offlineMapProgressView.hidden = YES;
+    
+    if(error)
+    {
+        if(error.code == MBXMapKitErrorCodeDownloadingCanceled)
+        {
+            // Ignore cancellations,
+        }
+        else
+        {
+            // ...but pay attention to other errors
+            //
+            NSLog(@"The offline map download completed with an error: %@",error);
+        }
+    }
+}
 
 
 #pragma mark - MKMapViewDelegate protocol implementation
@@ -292,12 +522,14 @@
         MKTileOverlayRenderer *renderer = [[MKTileOverlayRenderer alloc] initWithTileOverlay:overlay];
         return renderer;
     }
+    return nil;
+    
     if ([overlay isKindOfClass:[MKPolyline class]])
     {
         MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
         
         renderer.strokeColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
-        renderer.lineWidth   = 3;
+        renderer.lineWidth   = 2;
         
         return renderer;
     }
@@ -338,7 +570,7 @@
     }
     else
     {
-        [_mapView mbx_setCenterCoordinate:overlay.center zoomLevel:overlay.centerZoom animated:YES];
+        [_mapView mbx_setCenterCoordinate:overlay.center zoomLevel:overlay.centerZoom animated:NO];
     }
 }
 
@@ -362,134 +594,67 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
-
-
 - (void)viewWillAppear:(BOOL)animated {
     _locationsArray = [[NSMutableArray alloc] init];
 }
 
 
-#pragma mark Start Button
-
+//start location manager
 - (IBAction)startTracking:(id)sender{
     
-    [UIView animateWithDuration:0.5 animations:^{
-        _startTracking.alpha = 0;
-    }];
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-    [locationManager startUpdatingLocation];
-    locationManager.distanceFilter = 2;
+    
+    _manager = [[CLLocationManager alloc] init];
+    
+    _manager.delegate = _mapView.self;
+    _manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    [_manager startUpdatingLocation];
+    _manager.distanceFilter = 10;
+    self.mapView.delegate = self;
+    [self.mapView setShowsUserLocation:YES];
+    
+    
+    
+    //start location manager
+    
     
 }
-
-
-#pragma mark CLLocation Manager
-
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
     //get the latest location
     CLLocation *currentLocation = [locations lastObject];
     
-   
+    //store latest location in stored track array;
+    [_locationsArray addObject:currentLocation];
+    
     //get latest location coordinates
-    CLLocationDegrees latitude = currentLocation.coordinate.latitude;
-    CLLocationDegrees longitude = currentLocation.coordinate.longitude;
-    CLLocationCoordinate2D locationCoordinates = CLLocationCoordinate2DMake(latitude, longitude);
+    CLLocationDegrees Latitude = currentLocation.coordinate.latitude;
+    CLLocationDegrees Longitude = currentLocation.coordinate.longitude;
+    CLLocationCoordinate2D locationCoordinates = CLLocationCoordinate2DMake(Latitude, Longitude);
     
     //zoom map to show users location
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationCoordinates, 2000, 2000);
-    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
-    [_mapView setRegion:adjustedRegion animated:YES];
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationCoordinates, 1000, 1000);
+    MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion]; [_mapView setRegion:adjustedRegion animated:YES];
     
-   
-        //store latest location in stored track array
-        [_locationsArray addObject:currentLocation];
-   
-    //create cllocationcoordinates to use for construction of polyline
     NSInteger numberOfSteps = _locationsArray.count;
+    
     CLLocationCoordinate2D coordinates[numberOfSteps];
     for (NSInteger index = 0; index < numberOfSteps; index++) {
         CLLocation *location = [_locationsArray objectAtIndex:index];
         CLLocationCoordinate2D coordinate2 = location.coordinate;
+        
         coordinates[index] = coordinate2;
     }
     
-    MKPolyline *routeLine = [MKPolyline polylineWithCoordinates:coordinates count:numberOfSteps];
-    [_mapView addOverlay:routeLine];
+    MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:coordinates count:numberOfSteps];
+    [_mapView addOverlay:polyLine];
     
     NSLog(@"%@", _locationsArray);
-    
-}
-
-
--(IBAction)didClickSaveCoordinates:(id)sender {
-    
-    
-    // get a reference to the appDelegate so you can access the global managedObjectContext
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    
-    // creates a new polyline object when app goes into the background, and stores it into core data.
-    if (!polyLine) {
-        NSManagedObject *object = [NSEntityDescription insertNewObjectForEntityForName:@"Route" inManagedObjectContext:appDelegate.managedObjectContext];
-        polyLine = (Route *)object;
-    }
-    
-    [polyLine setCoordinates:_locationsArray];
-    NSError *error;
-    if ([appDelegate.managedObjectContext save:&error]) {
-        NSLog(@"Saved");
-    }
-    else {
-        NSLog(@"Error: %@", error);
-    }
-  
 }
 
 
 
--(IBAction)didClickLoadCoordinates:(id)sender {
-    // get a reference to the appDelegate so you can access the global managedObjectContext
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Route"];
-    NSError *error;
-    id results = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
-    
-    if ([results count]) {
-        polyLine = (Route *)(results [0]);
-       
-        NSArray *coordinates = polyLine.coordinates;
-        int ct = 0;
-        for (CLLocation *loc in coordinates) {
-            NSLog(@"location %d: %@", ct++, loc);
-            
-            
-        }
-    
-        
-        // this copies the array to your mutableArray
-        _locationsArray = [coordinates mutableCopy];
-    
-    }
-    
-    NSInteger numberOfSteps = _locationsArray.count;
-    
-    //convert to coordinates array to construct the polyline
-    
-    CLLocationCoordinate2D clCoordinates[numberOfSteps];
-    for (NSInteger index = 0; index < numberOfSteps; index++) {
-        CLLocation *location = [_locationsArray objectAtIndex:index];
-        CLLocationCoordinate2D coordinate2 = location.coordinate;
-        clCoordinates[index] = coordinate2;
-    }
-    
-    MKPolyline *routeLine = [MKPolyline polylineWithCoordinates:clCoordinates count:numberOfSteps];
-    [_mapView addOverlay:routeLine];
 
 
-}
 
 @end
