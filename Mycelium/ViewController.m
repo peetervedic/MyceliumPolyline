@@ -103,6 +103,9 @@
         [self offlineMapDownloader:sharedDownloader totalFilesWritten:sharedDownloader.totalFilesWritten totalFilesExpectedToWrite:sharedDownloader.totalFilesExpectedToWrite];
         [[MBXOfflineMapDownloader sharedOfflineMapDownloader] resume];
     }
+
+    _locationsArray = [[NSMutableArray alloc] init];
+
 }
 
 
@@ -365,7 +368,8 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    _locationsArray = [[NSMutableArray alloc] init];
+    // if you do this, _locationsArray gets allocated every time you switch back to this screen. only do allocs in viewDidLoad
+//    _locationsArray = [[NSMutableArray alloc] init];
 }
 
 
@@ -438,6 +442,7 @@
     }
     
     [polyLine setCoordinates:_locationsArray];
+    [polyLine setCreated_at:[NSDate date]];
     NSError *error;
     if ([appDelegate.managedObjectContext save:&error]) {
         NSLog(@"Saved");
@@ -445,7 +450,9 @@
     else {
         NSLog(@"Error: %@", error);
     }
-  
+
+    // clear locationsArray since you've already saved the current coordinates into core data. essentially this starts a new, disconnected route
+    [_locationsArray removeAllObjects];
 }
 
 
@@ -457,39 +464,35 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Route"];
     NSError *error;
     id results = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
-    
-    if ([results count]) {
-        polyLine = (Route *)(results [0]);
-       
-        NSArray *coordinates = polyLine.coordinates;
+
+    // add a sort descriptor so you can sort by date
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created_at" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+
+    for (Route * route in results) {
+        // loop through all Routes saved into core data
+
+        NSArray *coordinates = route.coordinates;
         int ct = 0;
+        NSInteger numberOfSteps = coordinates.count;
+        CLLocationCoordinate2D clCoordinates[numberOfSteps];
+
+        // convert CLLocation array into a CLLocationCoordinate2D[]
+        // you were doing two loops, so you were looping through each set of coordinates each time you looped through the whole array of coordinates. doing x^2 the work!
         for (CLLocation *loc in coordinates) {
             NSLog(@"location %d: %@", ct++, loc);
-            
-            
+            CLLocationCoordinate2D coordinate2 = loc.coordinate;
+            //convert to coordinates array to construct the polyline
+            clCoordinates[ct] = coordinate2;
         }
-    
-        
-        // this copies the array to your mutableArray
-        _locationsArray = [coordinates mutableCopy];
-    
-    }
-    
-    NSInteger numberOfSteps = _locationsArray.count;
-    
-    //convert to coordinates array to construct the polyline
-    
-    CLLocationCoordinate2D clCoordinates[numberOfSteps];
-    for (NSInteger index = 0; index < numberOfSteps; index++) {
-        CLLocation *location = [_locationsArray objectAtIndex:index];
-        CLLocationCoordinate2D coordinate2 = location.coordinate;
-        clCoordinates[index] = coordinate2;
-    }
-    
-    MKPolyline *routeLine = [MKPolyline polylineWithCoordinates:clCoordinates count:numberOfSteps];
-    [_mapView addOverlay:routeLine];
 
+        // create a new map overlay for each of the routes loaded from core data. these will be disconnected from each other.
+        MKPolyline *routeLine = [MKPolyline polylineWithCoordinates:clCoordinates count:numberOfSteps];
+        [_mapView addOverlay:routeLine];
+    }
 
+    // start with a fresh _locationsArray
+    [_locationsArray removeAllObjects];
 }
 
 @end
