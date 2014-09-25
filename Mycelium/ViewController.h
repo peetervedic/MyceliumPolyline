@@ -20,7 +20,8 @@
     CLLocationManager *locationManager;
     NSMutableArray *_locationsArray;
     Route *polyLine;
-    
+
+    BOOL isMapReady;
 }
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;

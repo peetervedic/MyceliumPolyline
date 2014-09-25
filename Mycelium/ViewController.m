@@ -285,6 +285,9 @@
 
 
 #pragma mark - MKMapViewDelegate protocol implementation
+-(void) mapView:(MKMapView *)_mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    isMapReady = YES;
+}
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
 {
@@ -410,6 +413,7 @@
     
    
         //store latest location in stored track array
+    if (isMapReady)
         [_locationsArray addObject:currentLocation];
    
     //create cllocationcoordinates to use for construction of polyline
