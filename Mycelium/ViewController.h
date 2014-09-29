@@ -22,6 +22,7 @@
     Route *polyLine;
 
     BOOL isMapReady;
+    BOOL startedTracking;
 }
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;

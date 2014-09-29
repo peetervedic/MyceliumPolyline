@@ -106,6 +106,12 @@
 
     _locationsArray = [[NSMutableArray alloc] init];
 
+    // create location manager
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    locationManager.distanceFilter = 2;
+    [locationManager startUpdatingLocation];
 }
 
 
@@ -382,13 +388,9 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         _startTracking.alpha = 0;
+    } completion:^(BOOL finished) {
+        startedTracking = YES;
     }];
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-    [locationManager startUpdatingLocation];
-    locationManager.distanceFilter = 2;
-    
 }
 
 
@@ -396,23 +398,40 @@
 
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    
+    if (startedTracking == NO)
+        return;
+
     //get the latest location
     CLLocation *currentLocation = [locations lastObject];
-    
    
     //get latest location coordinates
     CLLocationDegrees latitude = currentLocation.coordinate.latitude;
     CLLocationDegrees longitude = currentLocation.coordinate.longitude;
     CLLocationCoordinate2D locationCoordinates = CLLocationCoordinate2DMake(latitude, longitude);
-    
+
+    // filter based on accuracy
+    const int LOCATION_ACCURACY_LIMIT = 100; // meters, change this if you want
+    if (currentLocation.horizontalAccuracy < 0 || currentLocation.horizontalAccuracy > LOCATION_ACCURACY_LIMIT)
+    {
+        NSLog(@"Discarding location: reason: inaccurate.");
+        return;
+    }
+
+    // filter based on your current lat/long - this is current San Francisco, CA
+    const float base_lat = 37.75;
+    const float base_lon = -122.45;
+    const float LOCATION_DISTANCE_FILTER = 500; // meters
+    if ([currentLocation distanceFromLocation:[[CLLocation alloc] initWithLatitude:base_lat longitude:base_lon]] > LOCATION_DISTANCE_FILTER) {
+        return;
+    }
+
     //zoom map to show users location
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(locationCoordinates, 2000, 2000);
     MKCoordinateRegion adjustedRegion = [_mapView regionThatFits:viewRegion];
     [_mapView setRegion:adjustedRegion animated:YES];
     
    
-        //store latest location in stored track array
+    //store latest location in stored track array
     if (isMapReady)
         [_locationsArray addObject:currentLocation];
    
