@@ -388,6 +388,8 @@
     
     [UIView animateWithDuration:0.5 animations:^{
         _startTracking.alpha = 0;
+    } completion:^(BOOL finished) {
+        startedTracking = YES;
     }];
 }
 
